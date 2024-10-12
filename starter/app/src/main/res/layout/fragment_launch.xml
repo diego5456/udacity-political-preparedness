@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.android.politicalpreparedness.MainActivity">
+
+        <!-- TODO: Add image for home screen logo. -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ballot_logo"
+            app:layout_constraintBottom_toTopOf="@+id/elections_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- TODO: Add Button to navigate to upcoming elections. -->
+
+        <TextView
+            android:id="@+id/elections_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large"
+            android:layout_marginEnd="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/padding_large"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/upcoming_elections"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toTopOf="@+id/representatives_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/representatives_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_large"
+            android:layout_marginEnd="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/padding_large"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/find_my_representatives"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- TODO: Add Button to navigate to representatives. -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
