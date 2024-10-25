@@ -26,6 +26,7 @@ android {
     }
     buildFeatures {
         dataBinding true
+        buildConfig true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_21
@@ -63,13 +64,16 @@ dependencies {
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
     implementation "com.squareup.moshi:moshi-adapters:$version_moshi"
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.14"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14"
 
     // Glide
-    // TODO: Add Glide Implementation
+    implementation "com.github.bumptech.glide:glide:4.12.0"
 
     // Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.room:room-ktx:2.6.1"
 
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"

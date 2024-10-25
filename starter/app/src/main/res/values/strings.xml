@@ -3,6 +3,24 @@
     <string name="app_name">Political Preparedness</string>
     <string name="upcoming_elections">Upcoming Elections</string>
     <string name="find_my_representatives">Find My Representatives</string>
+    <string name="followed_elections">Followed Elections</string>
+    <string name="settings">Settings</string>
+    <string name="location_required_error">Location services must be enabled to use the app</string>
+    <string name="election_information">Election Information</string>
+    <string name="state_locations">Find State Voting Locations</string>
+    <string name="find_state_ballot_sample">Find State Ballot Sample</string>
+    <string name="state_correspondence">State Correspondence</string>
+    <string name="unfollow_button">Unfollow Election</string>
+    <string name="follow_button">Follow Election</string>
+    <string name="search_button">Find My Representatives</string>
+    <string name="use_my_location">Use My Location</string>
+    <string name="representative_search">Representative Search</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="city">City</string>
+    <string name="my_representatives">My Representatives</string>
+    <string name="find_election_information">Find Election Information</string>
 
     <!-- TODO: Add necessary string values -->
 

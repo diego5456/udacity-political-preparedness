@@ -1,12 +1,47 @@
 package com.example.android.politicalpreparedness.representative
 
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.repository.ElectionsRepository
+import com.example.android.politicalpreparedness.representative.model.Representative
+import com.example.android.politicalpreparedness.utils.LocationUtils
+import kotlinx.coroutines.launch
 
-class RepresentativeViewModel: ViewModel() {
+class RepresentativeViewModel(private val electionsRepository: ElectionsRepository, private val application: Application) : ViewModel() {
 
     //TODO: Establish live data for representatives and address
+    private val _representatives =  MutableLiveData<List<Representative>>()
+    val representatives:  LiveData<List<Representative>>
+        get() = _representatives
+
+    private val _address = MutableLiveData<String>()
+    val address: MutableLiveData<String>
+        get() = _address
+
+    val addressLine1 = MutableLiveData<String>()
+    val addressLine2 = MutableLiveData<String>()
+    val city = MutableLiveData<String>()
+    val state = MutableLiveData<String>()
+    val statePosition = MutableLiveData<Int>()
+    val zip = MutableLiveData<String>()
+    val response = MutableLiveData<List<Representative>>()
+
 
     //TODO: Create function to fetch representatives from API from a provided address
+
+    fun getRepresentatives() {
+        viewModelScope.launch {
+            getAddressFromFields()
+            _representatives.value = address.value?.let { electionsRepository.getRepresentatives(it) }
+            Log.i("RepresentativeViewModel", "getRepresentatives: ${response.value}")
+        }
+    }
 
     /**
      *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
@@ -20,7 +55,43 @@ class RepresentativeViewModel: ViewModel() {
      */
 
     //TODO: Create function get address from geo location
+    fun getLocationAndAddress(context: Context) {
+        viewModelScope.launch {
+            val address = LocationUtils.getLocationAndAddress(context)
+            if (address != null) {
+                Log.i("RepresentativeFragment", "getLocationAndAddress: $address")
+                val locationAddress = address
+
+                val thoroughfare = address.thoroughfare ?: ""
+                val subThoroughfare = address.subThoroughfare ?: ""
+                val addressCity = address.locality ?: ""
+                val addressState = address.adminArea ?: ""
+                val addressZip = address.postalCode ?: ""
+
+
+                addressLine1.value = thoroughfare
+                addressLine2.value = subThoroughfare
+                city.value = addressCity
+                zip.value = addressZip
+                statePosition.value = getStatePosition(addressState)
+            }
+        }
+    }
+
+    private fun getStatePosition(state: String): Int {
+        val states = application.resources.getStringArray(R.array.states)
+        return states.indexOf(state).takeIf { it >= 0 } ?: 0
+    }
 
     //TODO: Create function to get address from individual fields
+    private fun getAddressFromFields(): String {
+        val addressLine1 = addressLine1.value
+        val addressLine2 = addressLine2.value
+        val city = city.value
+        val state = state.value
+        val zip = zip.value
+        address.value =  "$addressLine1 $addressLine2 $city $state $zip"
+        return ""
+    }
 
 }
