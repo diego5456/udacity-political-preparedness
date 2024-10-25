@@ -37,7 +37,7 @@
         <action
             android:id="@+id/action_voterInfoFragment_to_electionsFragment"
             app:destination="@id/electionsFragment"
-            app:popUpTo="@id/voterInfoFragment"
+            app:popUpTo="@id/electionsFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
