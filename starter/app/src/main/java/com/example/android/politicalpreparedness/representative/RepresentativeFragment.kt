@@ -80,7 +80,6 @@ class DetailFragment : Fragment() {
     private fun formListener(){
         val fields = listOf(
             binding.addressLine1,
-            binding.addressLine2,
             binding.city,
             binding.zip
         )
@@ -104,7 +103,6 @@ class DetailFragment : Fragment() {
 
     private fun checkForCompletion(): Boolean{
         val isComplete = viewModel.addressLine1.value?.isNotEmpty() == true &&
-                viewModel.addressLine2.value?.isNotEmpty() == true &&
                 viewModel.city.value?.isNotEmpty() == true &&
                 viewModel.zip.value?.isNotEmpty() == true
         binding.buttonSearch.isEnabled = isComplete

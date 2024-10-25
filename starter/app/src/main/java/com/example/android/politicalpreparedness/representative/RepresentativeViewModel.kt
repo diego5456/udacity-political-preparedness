@@ -38,6 +38,7 @@ class RepresentativeViewModel(private val electionsRepository: ElectionsReposito
     fun getRepresentatives() {
         viewModelScope.launch {
             getAddressFromFields()
+            Log.i("RepresentativeViewModel", "getRepresentatives Address: $_address.value")
             _representatives.value = address.value?.let { electionsRepository.getRepresentatives(it) }
             Log.i("RepresentativeViewModel", "getRepresentatives: ${response.value}")
         }

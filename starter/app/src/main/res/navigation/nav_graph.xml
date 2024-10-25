@@ -16,7 +16,9 @@
             app:destination="@id/electionsFragment" />
         <action
             android:id="@+id/action_launchFragment_to_representativeFragment"
-            app:destination="@id/representativeFragment" />
+            app:destination="@id/representativeFragment"
+            app:popUpTo="@id/representativeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
