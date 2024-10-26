@@ -8,16 +8,18 @@
             name="viewModel"
             type="com.example.android.politicalpreparedness.election.ElectionsViewModel" />
     </data>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.example.android.politicalpreparedness.MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_half"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="horizontal" />
 
             <!-- RecyclerView for upcoming elections -->
 
@@ -40,20 +42,12 @@
                 android:layout_height="0dp"
                 android:padding="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_half"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/election_header"
                 app:upcomingElectionsList="@{viewModel.upcomingElections}"
                 tools:listitem="@layout/election_item" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-<!--        &lt;!&ndash; TODO: Add Saved Election Recycler and Header &ndash;&gt;-->
 
             <TextView
                 android:id="@+id/followed_header"
@@ -66,7 +60,7 @@
                 android:textSize="@dimen/text_size_large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/guideline_half" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/followed_recycler"
@@ -74,10 +68,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/followed_header"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/election_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
 </layout>
