@@ -3,6 +3,7 @@ package com.example.android.politicalpreparedness.representative
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,10 +38,14 @@ class RepresentativeViewModel(private val electionsRepository: ElectionsReposito
 
     fun getRepresentatives() {
         viewModelScope.launch {
-            getAddressFromFields()
-            Log.i("RepresentativeViewModel", "getRepresentatives Address: $_address.value")
-            _representatives.value = address.value?.let { electionsRepository.getRepresentatives(it) }
-            Log.i("RepresentativeViewModel", "getRepresentatives: ${response.value}")
+            try {
+                getAddressFromFields()
+                _representatives.value =
+                    address.value?.let { electionsRepository.getRepresentatives(it) }
+            } catch (e: Exception) {
+                Log.e("RepresentativeViewModel", "Error fetching representatives: ${e.message}")
+                Toast.makeText(application, "Error fetching representatives", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
