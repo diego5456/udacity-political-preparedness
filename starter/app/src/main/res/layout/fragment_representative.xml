@@ -17,6 +17,7 @@
 
         <!-- TODO: Add motion scene to hide form on vertical scroll. -->
         <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutDescription="@xml/hide_form_motion">
@@ -47,6 +48,7 @@
                     android:hint="@string/address_line_1"
                     android:inputType="textPostalAddress"
                     android:text="@={viewModel.addressLine1}"
+                    android:saveEnabled="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/search_title" />
 

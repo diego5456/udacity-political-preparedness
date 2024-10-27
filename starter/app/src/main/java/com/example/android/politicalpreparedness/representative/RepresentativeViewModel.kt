@@ -100,4 +100,8 @@ class RepresentativeViewModel(private val electionsRepository: ElectionsReposito
         return ""
     }
 
+    fun setRepresentatives(representatives: List<Representative>) {
+        _representatives.value = representatives
+    }
+
 }

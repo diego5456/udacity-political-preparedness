@@ -22,6 +22,7 @@ import com.example.android.politicalpreparedness.utils.createPermissionDeniedSna
 import com.example.android.politicalpreparedness.utils.locationPermissions
 import com.example.android.politicalpreparedness.utils.permissionRequests
 import com.google.android.material.snackbar.Snackbar
+import java.util.ArrayList
 
 class DetailFragment : Fragment() {
     private var locationAddress: Address? = null
@@ -74,6 +75,36 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.representatives.observe(viewLifecycleOwner){representative ->
             representativeAdapter?.submitList(representative)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("addressLine1", binding.addressLine1.text.toString())
+        outState.putString("addressLine2", binding.addressLine2.text.toString())
+        outState.putString("city", binding.city.text.toString())
+        outState.putString("zip", binding.zip.text.toString())
+        outState.putInt("state", binding.state.selectedItemPosition)
+        outState.putInt("motionState",binding.motionLayout.currentState)
+
+        outState.putParcelableArrayList("representatives",
+            viewModel.representatives.value?.let { ArrayList(it) })
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.let {
+            viewModel.addressLine1.value = it.getString("addressLine1")
+            viewModel.addressLine2.value = it.getString("addressLine2")
+            viewModel.city.value = it.getString("city")
+            viewModel.zip.value = it.getString("zip")
+            viewModel.statePosition.value = it.getInt("state")
+            viewModel.setRepresentatives(it.getParcelableArrayList("representatives") ?: emptyList())
+            savedInstanceState.getInt("motionState").let {
+                binding.motionLayout.transitionToState(it)
+            }
+            checkForCompletion()
+
         }
     }
 
